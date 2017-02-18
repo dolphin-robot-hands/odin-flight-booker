@@ -1,0 +1,21 @@
+
+    <%= form_tag("/", method: "get") do %>
+      <%= label_tag("FROM") %>
+      <%= select(:flight, :from_airport_id, @airport_options) %>
+      <%= label_tag("TO") %>
+      <%= select(:flight, :to_airport_id, @airport_options) %>
+      <%= label_tag("Date") %>
+      <%= select(:flight, :start, @date_options) %>
+      <%= label_tag("Number of passengers") %>
+      <%= number_field_tag(:number) %>
+      <%= submit_tag("Search") %>
+    <% end %>
+
+    <% if !!@flight_options %>
+      <%= form_tag("/bookings/new", method: "get") do %>
+        <%= hidden_field_tag 'number', @number %>
+        <%= label_tag("Flight options") %>
+        <%= collection_radio_buttons(:flight, :id, @flights.all, :id, :flight_info) %>
+        <%= submit_tag("Select") %>
+      <% end %>
+    <% end %>
