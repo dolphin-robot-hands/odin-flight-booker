@@ -1,7 +1,9 @@
 class FlightsController < ApplicationController
   def index
     @airport_options = Airport.all.map { |a| [a.code, a.id] }
-    @date_options = Flight.all.map {|f| [f.start.to_date]}
+
+    dates = Flight.all.map {|f| [f.start.to_date]}
+    @date_options = dates.uniq
 
     if !!params[:flight]
       temp_flight = Flight.new(flight_params)
