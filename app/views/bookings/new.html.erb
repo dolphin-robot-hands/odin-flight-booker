@@ -4,6 +4,7 @@
 <p> DATE <%= "#{@flight.start.to_date}" %> </p>
 
   <%= form_for(@booking) do |f| %>
+
     <%= f.fields_for :passengers do |passenger| %>
     <%= passenger.text_field :name %>
     <%= passenger.text_field :email %>
@@ -11,23 +12,3 @@
     <%= f.hidden_field :flight_id %>
     <%= f.submit "Book Flight", class: "button" %>
   <% end %>
-
-
-  <div class="row">
-	<div class="col-md-6 col-md-offset-3">
-<%= form_for @booking do |f| %>
-  <%= f.hidden_field :flight_id, :value => @flight.id %>
-
-
-  <%= f.fields_for :passengers do |p| %>
-    <p><%= p.label :name, "Passenger Name" %>
-    	<%= p.text_field :name  %>
-    	<%= p.label :email, "Contact Email" %>
-    <%= p.text_field :email %></p>
-  <% end %>
-
-  <%= f.submit "Confirm Details", class: "btn btn-danger" %>
-
-<% end %>
-  </div>
-</div>
