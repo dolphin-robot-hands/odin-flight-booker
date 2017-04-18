@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 root "flights#index"
 
 post "/", to: 'flights#create'
-#post "/booking/new" to: 'bookings#new'
+get "/bookings/new", to: 'bookings#new'
+resources :bookings, only: [:new, :create, :show]
 
 end

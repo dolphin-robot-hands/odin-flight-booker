@@ -2,7 +2,7 @@ class FlightsController < ApplicationController
   def index
     @airport_options = Airport.all.map { |a| [a.code, a.id] }
     @date_options = Flight.all.map {|f| [f.start.to_date]}
-    #@flight = Flight.new
+
     if !!params[:flight]
       temp_flight = Flight.new(flight_params)
       @number = params[:number]
@@ -12,7 +12,6 @@ class FlightsController < ApplicationController
       @flight_options = @flights.all.map {|f| ["#{f.from_airport.code} to
                                                 #{f.to_airport.code}
                                                 on #{f.start}" , f.id]}
-      #@flight_options = Flight.search(flight_params)
     end
   end
 
@@ -25,12 +24,5 @@ class FlightsController < ApplicationController
     redirect_to root_path
 
   end
-
-  private
-
-    def flight_params
-      params.require(:flight).permit(:from_airport_id, :to_airport_id, :start)
-    end
-
 
 end
