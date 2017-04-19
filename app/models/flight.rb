@@ -8,8 +8,5 @@ class Flight < ApplicationRecord
     "#{from_airport.code} to #{to_airport.code} on #{start}"
   end
 
-  #def date_formatted(date)
-  #  date.strftime(%m/%d/%y)
-  #end
-  
+
 end

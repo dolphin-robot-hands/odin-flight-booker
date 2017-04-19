@@ -7,19 +7,13 @@ class FlightsController < ApplicationController
       temp_flight = Flight.new(flight_params)
       @number = params[:number]
 
+      #refactor into function in model
       @flights = Flight.where("from_airport_id = ?",
       temp_flight.from_airport_id).where("to_airport_id = ?",
-      temp_flight.to_airport_id)
+      temp_flight.to_airport_id).where("start BETWEEN ? AND ?",
+      temp_flight.start.to_datetime.beginning_of_day, temp_flight.start.to_datetime.end_of_day)
 
-      #@flights = @flights.all.map do |f|
-      #  if f.start.to_date == params[:start]
-      #    [f]
-      #  end
-      #end
-
-      #@flights = Flight.where("from_airport_id = ?",
-      #temp_flight.from_airport_id).where("to_airport_id = ?",
-      #temp_flight.to_airport_id)
+      #refactor into function in model
       @flight_options = @flights.all.map {|f| ["#{f.from_airport.code} to
                                                 #{f.to_airport.code}
                                                 on #{f.start.to_date}" , f.id]}
