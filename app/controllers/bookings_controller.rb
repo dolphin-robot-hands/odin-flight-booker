@@ -6,12 +6,9 @@ class BookingsController < ApplicationController
   end
 
   def create
-    #@booking = Booking.new(booking_params)
-    @flight = Flight.find_by(id: booking_params[:flight_id])
-    @flight.bookings.create(booking_params)
-    @booking = @flight.bookings.last
+    @booking = Booking.new(booking_params)
 
-    if @flight.save
+    if @booking.save
       redirect_to booking_path(@booking)
     else
       @flight = Flight.find_by(id: booking_params[:flight_id])
