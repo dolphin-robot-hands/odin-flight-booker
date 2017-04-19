@@ -1,0 +1,35 @@
+<%=render partial: "itinerary"%>
+
+<div class="row col-md-4 col-md-offset-4">
+  <table class="table ">
+    <caption class="text-center"><h3>Passengers</h3></caption>
+    <% @booking.passengers.each do |p| %>
+      <tr>
+        <td>
+          Name:
+        </td>
+        <td class="text-right">
+          <%= p.name %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Email:
+        </td>
+        <td class="text-right">
+          <%= p.email %>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+
+        </td>
+        <td >
+
+        </td>
+      </tr>
+
+      <% end %>
+    </table>
+</div>

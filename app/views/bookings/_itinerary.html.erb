@@ -1,0 +1,45 @@
+<div class="row col-md-4 col-md-offset-4">
+  <table class="table">
+    <caption class="text-center"><h3>Itinerary</h3></caption>
+    <tr>
+      <td>
+        TO:
+      </td>
+      <td >
+        <%= "#{@booking.flight.to_airport.code}" %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        FROM:
+      </td>
+      <td >
+        <%= "#{@booking.flight.from_airport.code}" %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        DATE:
+      </td>
+      <td >
+        <%= "#{@booking.flight.start.to_date}" %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        DEPARTURE TIME:
+      </td>
+      <td >
+         <%= "#{@booking.flight.start.to_s(:time)}" %>
+       </td>
+    </tr>
+    <tr>
+      <td>
+        DURATION:
+      </td>
+      <td >
+         <%= "#{@booking.flight.duration} hrs" %>
+       </td>
+  </tr>
+    </table>
+</div>

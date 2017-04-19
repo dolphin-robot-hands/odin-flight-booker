@@ -1,5 +1,6 @@
 
-  <div class="search">
+  <div class="row">
+    <h1 class="text-center"> Search for cheap flights </h1>
     <%= form_tag("/", method: "get" )  do %>
       <div class="form-group col-sm-6">
         <%= label_tag "FROM"  %>
@@ -20,31 +21,7 @@
       <%= submit_tag("Search for flights",:class => "btn col-sm-4 col-sm-offset-4 btn-lg btn-outline-primary") %>
     <% end %>
   </div>
-  <div class="results row">
 
-  <div class="col-sm-12">
-    <table>
-      <th>Flight number<th>
-      <th>Flight number<th>
-      <th>Flight number<th>
-      <th>Flight number<th>
-    </table>
-
-
-  </div>
-
-
-
-
-    <div class="col-sm-12">
-    <% if !!@flight_options %>
-      <%= form_tag("/bookings/new", method: "get") do %>
-        <%= hidden_field_tag 'number', @number %>
-        <%= label_tag("Flight options") %><br>
-        <%= collection_radio_buttons(:flight, :id, @flights.all, :id, :flight_info) %>
-        <%= submit_tag("Select") %>
-      <% end %>
-    <% end %>
-  </div>
-
-</div>
+<% if !!@flight_options %>
+  <%=render partial: "results"%>
+<% end %>  

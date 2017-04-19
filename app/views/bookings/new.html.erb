@@ -1,14 +1,30 @@
+<%=render partial: "itinerary"%>
 
-<p> TO <%= "#{@flight.to_airport.code}" %> </p>
-<p> FROM <%= "#{@flight.from_airport.code}" %> </p>
-<p> DATE <%= "#{@flight.start.to_date}" %> </p>
-
+<div class="row col-md-6 col-md-offset-3 text-center"
+      style="border-bottom:1px solid lightgrey">
+  <h3>Enter Passenger Information</h3>
   <%= form_for(@booking) do |f| %>
+</div>
 
-    <%= f.fields_for :passengers do |passenger| %>
-    <%= passenger.text_field :name %>
-    <%= passenger.text_field :email %>
-    <% end %>
-    <%= f.hidden_field :flight_id %>
-    <%= f.submit "Book Flight", class: "button" %>
+  <% i = 1 %>
+  <%= f.fields_for :passengers do |passenger| %>
+
+    <div class="row" >
+      <div class="form-group col-md-6 col-md-offset-3">
+        <%= label_tag "Name #{i}"%>
+        <%= passenger.text_field :name, class: 'form-control' %>
+      </div>
+
+      <div class="form-group col-md-6 col-md-offset-3" >
+        <%= label_tag "email"  %>
+        <%= passenger.text_field :email, class: 'form-control' %>
+      </div>
+    </div>
+    <% i += 1 %>
+  <% end %>
+
+      <%= f.hidden_field :flight_id %>
+      <%= f.submit "Book Flight", class: "btn col-md-6 col-md-offset-3 text-center" %>
+    <div class="row" >
+    </div>
   <% end %>

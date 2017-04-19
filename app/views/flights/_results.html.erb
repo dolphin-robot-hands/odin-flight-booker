@@ -1,0 +1,36 @@
+<div class="row search">
+  <div class="col-sm-12">
+    <table class = "table">
+      <thead>
+        <th></th>
+        <th>Flight number</th>
+        <th>date</th>
+        <th>departure time</th>
+        <th>duration</th>
+        <th>departs</th>
+        <th>arrives</th>
+      </thead>
+      <tbody>
+      <% if !!@flight_options %>
+        <% @flights.each do |f| %>
+          <tr>
+            <td>
+                <%= form_tag("/bookings/new", method: "get") do %>
+                <%= hidden_field_tag 'number', @number %>
+                <%= hidden_field_tag 'flight', f.id  %>
+                <%= submit_tag("Select", :class => "btn-sm btn-outline-primary") %>
+              <% end %>
+             </td>
+             <td> placeholder </td>
+             <td><%= f.start.to_date %></td>
+             <td><%= f.start.to_s(:time) %></td>
+             <td><%= f.duration %> hrs</td>
+             <td><%= f.to_airport.code %></td>
+             <td><%= f.from_airport.code %></td>
+          </tr>
+        <% end %>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
