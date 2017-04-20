@@ -18,7 +18,8 @@
               start: DateTime.parse(start), duration: duration)
     flight.save
   end
-(17..18).each do |y|
+
+y = 17
   (1..12).each do |m|
 
     case m
@@ -32,7 +33,7 @@
 
     (1..z).each do |d|
 
-      (1..rand(3..6)).each do 
+      (1..rand(2..5)).each do
 
         h = rand(1..12)
         mi = rand(10..55)
@@ -55,4 +56,3 @@
       end
     end
   end
-end
