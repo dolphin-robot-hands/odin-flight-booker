@@ -8,10 +8,15 @@ class FlightsController < ApplicationController
       @number = params[:number]
 
       #refactor into function in model
+      #@flights = Flight.where("from_airport_id = ?",
+      #temp_flight.from_airport_id).where("to_airport_id = ?",
+      #temp_flight.to_airport_id).where("start BETWEEN ? AND ?",
+      #temp_flight.start.to_datetime.beginning_of_day, temp_flight.start.to_datetime.end_of_day)
+
       @flights = Flight.where("from_airport_id = ?",
       temp_flight.from_airport_id).where("to_airport_id = ?",
-      temp_flight.to_airport_id).where("start BETWEEN ? AND ?",
-      temp_flight.start.to_datetime.beginning_of_day, temp_flight.start.to_datetime.end_of_day)
+      temp_flight.to_airport_id).where("DATE(start) = ?",
+      temp_flight.start.to_date)
 
       #refactor into function in model
       @flight_options = @flights.all.map {|f| ["#{f.from_airport.code} to
