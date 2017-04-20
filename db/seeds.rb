@@ -8,7 +8,7 @@
  #Airport.create!( code: 'SFO' )
 
  Airport.delete_all
- airports = Airport.create([{ code: 'SFO' }, { code: 'MSP' },{ code: 'LAX' }, { code: 'NYC' }])
+ airports = Airport.create([{ code: 'SFO' }, { code: 'MSP' },{ code: 'LAX' }, { code: 'JFK' }])
 
  Flight.delete_all
 
@@ -18,10 +18,22 @@
               start: DateTime.parse(start), duration: duration)
     flight.save
   end
+  (1..2).each do |m|
+    (1..28).each do |d|
+      make_flight("MSP", "JFK", "2017/#{m}/#{d} 10:20", 4)
+      make_flight("MSP", "SFO", "2017/#{m}/#{d} 5:30", 4)
+      make_flight("MSP", "LAX", "2017/#{m}/#{d} 3:00", 5)
 
-  (1..10).each do |d|
-    make_flight("MSP", "NYC", "2017/3/#{d} 10:00", 4)
-    make_flight("NYC", "MSP", "2017/3/#{d} 5:00", 4)
-    make_flight("NYC", "SFO", "2017/3/#{d} 3:00", 5)
-    make_flight("SFO", "NYC", "2017/3/#{d} 11:00", 5)
+      make_flight("SFO", "JFK", "2017/#{m}/#{d} 4:25", 4)
+      make_flight("SFO", "LAX", "2017/#{m}/#{d} 3:00", 5)
+      make_flight("SFO", "MSP", "2017/#{m}/#{d} 3:00", 5)
+
+      make_flight("LAX", "JFK", "2017/#{m}/#{d} 3:00", 5)
+      make_flight("LAX", "SFO", "2017/#{m}/#{d} 3:00", 5)
+      make_flight("LAX", "MSP", "2017/#{m}/#{d} 3:00", 5)
+
+      make_flight("JFK", "MSP", "2017/#{m}/#{d} 10:20", 4)
+      make_flight("JFK", "SFO", "2017/#{m}/#{d} 5:30", 4)
+      make_flight("JFK", "LAX", "2017/#{m}/#{d} 3:00", 5)
+    end
   end
