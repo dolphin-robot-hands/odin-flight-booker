@@ -13,27 +13,46 @@
  Flight.delete_all
 
   def make_flight(to, from, start, duration)
-    flight = Flight.create(to_airport_id: Airport.find_by(code: to).id,
-              from_airport_id: Airport.find_by(code: from).id,
+    flight = Flight.create(from_airport_id: Airport.find_by(code: to).id,
+              to_airport_id: Airport.find_by(code: from).id,
               start: DateTime.parse(start), duration: duration)
     flight.save
   end
-  (1..2).each do |m|
-    (1..28).each do |d|
-      make_flight("MSP", "JFK", "2017/#{m}/#{d} 10:20", 4)
-      make_flight("MSP", "SFO", "2017/#{m}/#{d} 5:30", 4)
-      make_flight("MSP", "LAX", "2017/#{m}/#{d} 3:00", 5)
+(17..18).each do |y|
+  (1..12).each do |m|
 
-      make_flight("SFO", "JFK", "2017/#{m}/#{d} 4:25", 4)
-      make_flight("SFO", "LAX", "2017/#{m}/#{d} 3:00", 5)
-      make_flight("SFO", "MSP", "2017/#{m}/#{d} 3:00", 5)
+    case m
+    when 1, 3, 5, 7, 8, 10, 12
+      z = 31
+    when 4, 6, 9, 11
+      z = 30
+    else
+      z= 28
+    end
 
-      make_flight("LAX", "JFK", "2017/#{m}/#{d} 3:00", 5)
-      make_flight("LAX", "SFO", "2017/#{m}/#{d} 3:00", 5)
-      make_flight("LAX", "MSP", "2017/#{m}/#{d} 3:00", 5)
+    (1..z).each do |d|
 
-      make_flight("JFK", "MSP", "2017/#{m}/#{d} 10:20", 4)
-      make_flight("JFK", "SFO", "2017/#{m}/#{d} 5:30", 4)
-      make_flight("JFK", "LAX", "2017/#{m}/#{d} 3:00", 5)
+      (1..rand(3..6)).each do 
+
+        h = rand(1..12)
+        mi = rand(10..55)
+
+        make_flight("MSP", "JFK", "20#{y}/#{m}/#{d} #{h}:#{mi}", 4)
+        make_flight("MSP", "SFO", "20#{y}/#{m}/#{d} #{h}:#{mi}", 4)
+        make_flight("MSP", "LAX", "20#{y}/#{m}/#{d} #{h}:#{mi}", 5)
+
+        make_flight("SFO", "JFK", "20#{y}/#{m}/#{d} #{h}:#{mi}", 4)
+        make_flight("SFO", "LAX", "20#{y}/#{m}/#{d} #{h}:#{mi}", 5)
+        make_flight("SFO", "MSP", "20#{y}/#{m}/#{d} #{h}:#{mi}", 5)
+
+        make_flight("LAX", "JFK", "20#{y}/#{m}/#{d} #{h}:#{mi}", 5)
+        make_flight("LAX", "SFO", "20#{y}/#{m}/#{d} #{h}:#{mi}", 5)
+        make_flight("LAX", "MSP", "20#{y}/#{m}/#{d} #{h}:#{mi}", 5)
+
+        make_flight("JFK", "MSP", "20#{y}/#{m}/#{d} #{h}:#{mi}", 4)
+        make_flight("JFK", "SFO", "20#{y}/#{m}/#{d} #{h}:#{mi}", 4)
+        make_flight("JFK", "LAX", "20#{y}/#{m}/#{d} #{h}:#{mi}", 5)
+      end
     end
   end
+end
